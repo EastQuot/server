@@ -10,7 +10,7 @@ app.use(express.urlencoded());
 
 
 
-app.get('/', (_, res) => res.send('Hello World!'))
+app.get('/', (_, res) => res.send('Trololo!'))
 
 
 app.get('/event', (req, res) => {
