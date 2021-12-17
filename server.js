@@ -1,10 +1,18 @@
 const express = require('express')
-const app = express();
-
+const fs = require('fs');
+const https = require('https');
+const port = 3000;
 const connections = []
 
+var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
+var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
 
+var options = {
+  key: key,
+  cert: cert
+};
 
+app = express()
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -61,24 +69,11 @@ function sendSSE(data, connections = []) {
 
 
 
-app.listen(3000, (e) => {
-    console.log(`Example app listening at 3000`)
-})
+var server = https.createServer(options, app);
 
-
-
-// const host = '0.0.0.0';
-// const port = 80;
-
-// const http = require('http')
-
-// const server = http.createServer((req, res) => {
-//     res.end('Trololo')
-// });
-
-// server.listen(port, host, () => {
-//     console.log(`Server is running on http://${host}:${port}`);
-// });
+server.listen(port, () => {
+  console.log("server https starting on port : " + port)
+});
 
 
 
