@@ -22,6 +22,7 @@ app.get('/', (_, res) => res.send('Trololo!'))
 
 
 app.get('/event', (req, res) => {
+    console.log('event')
     if (req.headers.accept && req.headers.accept.includes('text/event-stream')) {
         handleSSE(res, connections)
         return sendSSE({ init: true }, [res])
@@ -29,9 +30,6 @@ app.get('/event', (req, res) => {
 })
 
 app.post('/steam', (req, res) => {
-    // res.writeHead(200, {
-    //     'Access-Control-Allow-Origin': '*',
-    // })
     sendSSE(req.body, connections)
     res.send('Okey');
 })
@@ -48,10 +46,12 @@ function handleSSE(res, connections = []) {
         'Cache-Control': 'no-cache',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Headers': 'content-type',
-        Connection: 'keep-alive'
+        // 'Access-Control-Allow-Headers': 'content-type',
+        'Connection': 'keep-alive',
+        'Content-length': '13'
     })
     res.on('close', () => {
+        console.log('close')
         connections.splice(connections.findIndex(c => res === c), 1)
     })
 }
