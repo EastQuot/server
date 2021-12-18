@@ -47,7 +47,7 @@ function handleSSE(res, connections = []) {
         'Access-Control-Allow-Methods': '*',
         // 'Access-Control-Allow-Headers': 'content-type',
         'Connection': 'keep-alive',
-        // 'Content-length': '13'
+        'Content-length': '10000000'
     })
     res.on('close', () => {
         console.log('close')
