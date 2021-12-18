@@ -42,13 +42,13 @@ app.post('/steam', (req, res) => {
 function handleSSE(res, connections = []) {
     connections.push(res)
     res.writeHead(200, {
-        'Content-Type': 'text/event-stream',
+        'Content-Type': 'text/event-stream; charset=utf-8',
         'Cache-Control': 'no-cache',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
         // 'Access-Control-Allow-Headers': 'content-type',
         'Connection': 'keep-alive',
-        'Content-length': '13'
+        // 'Content-length': '13'
     })
     res.on('close', () => {
         console.log('close')
