@@ -60,8 +60,8 @@ function handleSSE(res, connections = []) {
 function sendSSE(data, connections = []) {
     connections.forEach(connection => {
         const id = new Date().toISOString()
-        connection.write('data: ' + JSON.stringify(data) + '\n\n')
-        connection.write('id: ' + id + '\n')
+        connection.write('data: ' + JSON.stringify(data) + '\n')
+        connection.write('id: ' + id + '\n\n')
     })
 }
 
