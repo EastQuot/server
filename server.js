@@ -73,9 +73,11 @@ function healthСheck() {
     })
 }
 
+const interval = 110000;
+
 setInterval(() => {
     healthСheck();
-}, 110000)
+}, 1000)
 
 
 
