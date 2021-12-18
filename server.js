@@ -23,6 +23,7 @@ app.get('/', (_, res) => res.send('Trololo!'))
 
 app.get('/event', (req, res) => {
     console.log('event')
+    console.log(connections)
     if (req.headers.accept && req.headers.accept.includes('text/event-stream')) {
         handleSSE(res, connections)
         return sendSSE({ init: true }, [res])
@@ -52,15 +53,15 @@ function handleSSE(res, connections = []) {
     })
     res.on('close', () => {
         console.log('close')
-        connections.splice(connections.findIndex(c => res === c), 1)
+        // connections.splice(connections.findIndex(c => res === c), 1)
     })
 }
 
 function sendSSE(data, connections = []) {
     connections.forEach(connection => {
         const id = new Date().toISOString()
-        connection.write('id: ' + id + '\n')
         connection.write('data: ' + JSON.stringify(data) + '\n\n')
+        connection.write('id: ' + id + '\n')
     })
 }
 
