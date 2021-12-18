@@ -23,7 +23,7 @@ app.get('/', (_, res) => res.send('Trololo!'))
 
 app.get('/event', (req, res) => {
     console.log('event')
-    console.log(connections)
+    console.log(connections.length)
     if (req.headers.accept && req.headers.accept.includes('text/event-stream')) {
         handleSSE(res, connections)
         return sendSSE({ init: true }, [res])
