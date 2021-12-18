@@ -58,7 +58,7 @@ function handleSSE(res, connections = []) {
 function sendSSE(data, connections = []) {
     connections.forEach(connection => {
         const id = new Date().toISOString()
-        connection.write('id: ' + id + '\n')
+        !data.init && connection.write('id: ' + id + '\n')
         connection.write('retry:' + 0 + '\n')
         connection.write('data: ' + JSON.stringify(data) + '\n\n')
     })
@@ -66,7 +66,6 @@ function sendSSE(data, connections = []) {
 
 function healthСheck() {
     connections.forEach(connection => {
-        const id = new Date().toISOString()
         connection.write('retry:' + 0 + '\n')
         connection.write('data: ' + '' + '\n\n')
     })
