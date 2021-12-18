@@ -24,7 +24,7 @@ app.get('/', (_, res) => res.send('Trololo!'))
 app.get('/event', (req, res) => {
     if (req.headers.accept && req.headers.accept.includes('text/event-stream')) {
         handleSSE(res, connections)
-        return sendSSE({ init: true }, [res])
+        return sendSSE({ init: true }, [res]);
     }
 })
 
@@ -59,12 +59,23 @@ function sendSSE(data, connections = []) {
     connections.forEach(connection => {
         const id = new Date().toISOString()
         connection.write('id: ' + id + '\n')
-        connection.write('retry:' + 5000 + '\n')
+        connection.write('retry:' + 0 + '\n')
         connection.write('data: ' + JSON.stringify(data) + '\n\n')
     })
 }
 
+function healthСheck() {
+    connections.forEach(connection => {
+        const id = new Date().toISOString()
+        connection.write('id: ' + id + '\n')
+        connection.write('retry:' + 0 + '\n')
+        connection.write('data: ' + JSON.stringify({}) + '\n\n')
+    })
+}
 
+setInterval(() => {
+    healthСheck();
+}, 110000)
 
 
 
