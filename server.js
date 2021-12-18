@@ -53,7 +53,7 @@ function handleSSE(res, connections = []) {
     })
     res.on('close', () => {
         console.log('close')
-        // connections.splice(connections.findIndex(c => res === c), 1)
+        connections.splice(connections.findIndex(c => res === c), 1)
     })
 }
 
@@ -61,6 +61,7 @@ function sendSSE(data, connections = []) {
     connections.forEach(connection => {
         const id = new Date().toISOString()
         connection.write('data: ' + JSON.stringify(data) + '\n')
+        connection.write('retry: ' + '1' + '\n')
         connection.write('id: ' + id + '\n\n')
     })
 }
