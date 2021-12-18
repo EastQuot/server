@@ -12,7 +12,7 @@ var options = {
   cert: cert
 };
 
-app = express()
+app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -75,7 +75,7 @@ const interval = 110000;
 
 setInterval(() => {
     healthСheck();
-}, 1000)
+}, interval)
 
 
 
