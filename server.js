@@ -125,6 +125,9 @@ server.listen(port, () => {
 
 {
 
+const arr = ['Я тебя не понимаю, но все равно люблю!', 'Уфф', 'Как нибудь в другой раз', 'что-то бубнит..', 'что-то на бубническом..', 'Я закидываю сердечкаааами', 'не грусти!', 'Ахахаах, обожаю тебя!', 'Если на холоде, убери телефон!', 'Любовь!', 'Я не совсем понимаю, я просто скидываю сердечки, лучше напиши любимому!', 
+'Вселенная бесконечна!', 'Ты моя анестезия!', 'Фылм!']
+
     token = '5062287028:AAEYe2EqmZ0c2D3lCXnsgNyRLhmJF3r7HgU';
     const bot = new TelegramBot(token, { polling: true });
 
@@ -163,11 +166,19 @@ server.listen(port, () => {
             return bot.sendMessage(chatId, 'мур!')
         }
 
+        if (text.match(/кот/i)) {
+            return bot.sendMessage(chatId, 'мур!')
+        }
+
         if (text.match(/мур/i)) {
             return bot.sendMessage(chatId, '...')
         }
 
-        return bot.sendMessage(chatId, 'Я тебя не понимаю, но все равно люблю!')
+        if (text.match(/люблю тебя/i)) {
+            return Math.random() > 0.5 ? bot.sendMessage(chatId, 'И я тебя сильно сильно!!!') : bot.sendMessage(chatId, 'Я сильнее')
+        }
+        
+        return bot.sendMessage(chatId, arr[Math.floor(Math.random() * arr.length)])
     })
 
     bot.setMyCommands([
