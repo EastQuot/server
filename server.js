@@ -162,6 +162,18 @@ const arr = ['Я тебя не понимаю, но все равно люблю
             return;
         }
 
+        if (text === '/ultralove') {
+            new Array(100).fill(1).forEach((_, i) => {
+                bot.sendMessage(chatId, `❤️`);
+
+                setTimeout(() => {
+                    bot.sendMessage(chatId, `❤️`);
+                }, i * 200)
+            })
+  
+            return;
+        }
+
         if (text.match(/мяу/i)) {
             return bot.sendMessage(chatId, 'мур!')
         }
@@ -185,6 +197,7 @@ const arr = ['Я тебя не понимаю, но все равно люблю
         {command: '/love', description: 'Получить сердечко'},
         {command: '/morelove', description: 'Получить много сердечек!'},
         {command: '/moremorelove', description: 'Получить очень много сердечек!!!'},
+        {command: '/ultralove', description: 'Получить ультра много сердечек!!! Возможно что-то надъебнется от всепоглощяющей любви'},
     ])
 }
 
