@@ -30,7 +30,9 @@ app.get('/event', (req, res) => {
 
 app.post('/steam', (req, res) => {
     sendSSE(req.body, connections)
-    res.send('Okey');
+    sendSSE(req.body, connections)
+    sendSSE(req.body, connections)
+    res.send('OK');
 })
 
 
@@ -60,7 +62,7 @@ function sendSSE(data, connections = []) {
         const id = new Date().toISOString()
         if (!data.init) { connection.write('id: ' + id + '\n') }
         connection.write('retry:' + 0 + '\n')
-        connection.write('data: ' + JSON.stringify(data) + '\n\n')
+        connection.write('data: ' + JSON.stringify(data) + '\n\n');
     })
 }
 
