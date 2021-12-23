@@ -134,7 +134,11 @@ const arr = ['Я тебя не понимаю, но все равно люблю
     bot.on('message', msg => {
         const text = msg.text;
         const chatId = msg.chat.id;
-        console.log(text)
+        // console.log(text)
+
+        if (text === '/start') {
+            return bot.sendMessage(chatId, 'Доброе утро❤️');
+        }
 
         if (text === '/love') {
             return bot.sendMessage(chatId, `❤️‍🩹`);
