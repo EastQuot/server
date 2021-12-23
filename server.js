@@ -29,12 +29,16 @@ app.get('/event', (req, res) => {
 })
 
 app.post('/steam', (req, res) => {
-    sendSSE(req.body, connections)
-    sendSSE(req.body, connections)
-    setTimeout(() => sendSSE(req.body, connections));
-    setTimeout(() => sendSSE(req.body, connections), 100);
-    setTimeout(() => sendSSE(req.body, connections), 500);
+    const body = {...req.body}
+    sendSSE(body, connections)
+    setTimeout(() => sendSSE(body, connections));
+    setTimeout(() => sendSSE(body, connections), 100);
+    setTimeout(() => sendSSE(body, connections), 500);
+    setTimeout(() => sendSSE(body, connections), 1000);
+    setTimeout(() => sendSSE(body, connections), 2000);
+    setTimeout(() => sendSSE(body, connections), 3000);
     res.send('OK');
+    fs.appendFile('log.txt', `${new Date().toLocaleString()} : ${JSON.stringify(body)}\n`, () => {})
 })
 
 
