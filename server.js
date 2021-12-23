@@ -133,13 +133,16 @@ server.listen(port, () => {
         const chatId = msg.chat.id;
         console.log(text)
 
-        if (text === '/love') bot.sendMessage(chatId, `❤️‍🩹`);
+        if (text === '/love') {
+            return bot.sendMessage(chatId, `❤️‍🩹`);
+        }
 
         if (text === '/morelove') {
             [1,2,3,4].forEach(() => bot.sendMessage(chatId, `❤️`))
             setTimeout(() => {
                 bot.sendMessage(chatId, `❤️‍🔥!`);
             }, 700)
+            return;
         }
 
         if (text === '/moremorelove') {
@@ -153,15 +156,18 @@ server.listen(port, () => {
             setTimeout(() => {
                 bot.sendMessage(chatId, `❤️`);
             }, 6000)
+            return;
         }
 
         if (text.match(/мяу/i)) {
-            bot.sendMessage(chatId, 'мур!')
+            return bot.sendMessage(chatId, 'мур!')
         }
 
         if (text.match(/мур/i)) {
-            bot.sendMessage(chatId, '...')
+            return bot.sendMessage(chatId, '...')
         }
+
+        return bot.sendMessage(chatId, 'Я тебя не понимаю, но все равно люблю!')
     })
 
     bot.setMyCommands([
