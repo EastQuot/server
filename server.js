@@ -145,9 +145,9 @@ const arr = ['Я тебя не понимаю, но все равно люблю
         }
 
         if (text === '/morelove') {
-            [1,2,3,4].forEach(() => bot.sendMessage(chatId, `❤️`))
+            [1,2,3,4,5].forEach(() => bot.sendMessage(chatId, `❤️‍🔥!`))
             setTimeout(() => {
-                bot.sendMessage(chatId, `❤️‍🔥!`);
+                bot.sendMessage(chatId, `❤️`);
             }, 700)
             return;
         }
@@ -167,7 +167,7 @@ const arr = ['Я тебя не понимаю, но все равно люблю
         }
 
         if (text === '/ultralove') {
-            new Array(30).fill(1).forEach((_, i) => {
+            new Array(100).fill(1).forEach((_, i) => {
 
                 setTimeout(() => {
                     bot.sendMessage(chatId, `❤️`);
