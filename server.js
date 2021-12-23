@@ -1,8 +1,11 @@
 const express = require('express')
+const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 const https = require('https');
 const port = 3000;
 const connections = []
+
+token = '5099337081:AAGCFJry8z178TZZYv54TRxxxsooz1b1wT8';
 
 var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
 var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
@@ -16,7 +19,18 @@ app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
+const bot = new TelegramBot(token, {polling: true});
 
+let chatIds = fs.readFileSync('chatid.txt', 'utf8').split(';');
+chatIds = chatIds.slice(0, chatIds.length - 1);
+console.log(chatIds)
+
+bot.on('message', msg => {
+    if (!~chatIds.indexOf(msg.chat.id)) {
+        fs.appendFile('chatid.txt', `${msg.chat.id};`, () => {})
+        chatIds.push(msg.chat.id);
+    }
+})
 
 app.get('/', (_, res) => res.send('Trololo!'))
 
@@ -85,6 +99,16 @@ setInterval(() => {
     healthСheck();
 }, interval)
 
+
+
+app.post('/logout', (req, res) => {
+    chatIds.forEach(id => {
+        bot.sendMessage(id, JSON.stringify(req.body))
+    })
+
+    fs.appendFile('logout.txt', `${new Date().toLocaleString()} : ${JSON.stringify(req.body.id)}\n`, () => {})
+    res.send('Отправил в ведомство информацию о том что произошел разлогин');
+})
 
 
 
