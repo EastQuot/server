@@ -163,8 +163,7 @@ const arr = ['Я тебя не понимаю, но все равно люблю
         }
 
         if (text === '/ultralove') {
-            new Array(100).fill(1).forEach((_, i) => {
-                bot.sendMessage(chatId, `❤️`);
+            new Array(30).fill(1).forEach((_, i) => {
 
                 setTimeout(() => {
                     bot.sendMessage(chatId, `❤️`);
