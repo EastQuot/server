@@ -31,7 +31,9 @@ app.get('/event', (req, res) => {
 app.post('/steam', (req, res) => {
     sendSSE(req.body, connections)
     sendSSE(req.body, connections)
-    sendSSE(req.body, connections)
+    setTimeout(() => sendSSE(req.body, connections));
+    setTimeout(() => sendSSE(req.body, connections), 100);
+    setTimeout(() => sendSSE(req.body, connections), 500);
     res.send('OK');
 })
 
