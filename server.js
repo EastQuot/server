@@ -121,3 +121,67 @@ server.listen(port, () => {
 
 
 
+
+
+{
+
+    token = '5062287028:AAEYe2EqmZ0c2D3lCXnsgNyRLhmJF3r7HgU';
+    const bot = new TelegramBot(token, { polling: true });
+
+    bot.on('message', msg => {
+        const text = msg.text;
+        const chatId = msg.chat.id;
+        console.log(text)
+
+        if (text === '/love') bot.sendMessage(chatId, `❤️‍🩹`);
+
+        if (text === '/morelove') {
+            [1,2,3,4].forEach(() => bot.sendMessage(chatId, `❤️`))
+            setTimeout(() => {
+                bot.sendMessage(chatId, `❤️‍🔥!`);
+            }, 700)
+        }
+
+        if (text === '/moremorelove') {
+            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].forEach((_, i) => {
+                bot.sendMessage(chatId, `❤️!`);
+
+                setTimeout(() => {
+                    bot.sendMessage(chatId, `❤️!`);
+                }, i * 200)
+            })
+            setTimeout(() => {
+                bot.sendMessage(chatId, `❤️`);
+            }, 6000)
+        }
+
+        if (text.match(/мяу/i)) {
+            bot.sendMessage(chatId, 'мур!')
+        }
+
+        if (text.match(/мур/i)) {
+            bot.sendMessage(chatId, '...')
+        }
+    })
+
+    bot.setMyCommands([
+        {command: '/love', description: 'Получить сердечко'},
+        {command: '/morelove', description: 'Получить много сердечек!'},
+        {command: '/moremorelove', description: 'Получить очень много сердечек!!!'},
+    ])
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
